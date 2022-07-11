@@ -9,6 +9,7 @@ import java.io.Serializable;
 
 @Data
 @Embeddable
+@NoArgsConstructor
 public class FilmActorKey implements Serializable {
     @Column(name = "actor_id")
     private Integer actorID;
