@@ -35,15 +35,19 @@ public class Actor {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Actor actor = (Actor) o;
-        return actorId != null && Objects.equals(actorId, actor.actorId);
+    public int hashCode() {
+        return 13;
     }
 
     @Override
-    public int hashCode() {
-        return getClass().hashCode();
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Actor other = (Actor) obj;
+        return actorId != null && actorId.equals(other.getActorId());
     }
 }

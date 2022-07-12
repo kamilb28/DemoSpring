@@ -6,8 +6,13 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Getter
-@NoArgsConstructor //czy to musi byc jak nie mam innego konstruktora?
+@NoArgsConstructor
 public class ActorDto {
     public String firstName;
     public String lastName;
+
+    public ActorDto(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 }

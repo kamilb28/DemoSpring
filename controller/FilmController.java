@@ -33,7 +33,7 @@ public class FilmController {
     }
 
     @PostMapping(path="/add")
-    public @ResponseBody String addNewFilm (@RequestBody FilmDto filmDto){
+    public @ResponseBody Film addNewFilm (@RequestBody FilmDto filmDto){
         return filmService.createFilm(filmDto);
     }
 }

@@ -21,7 +21,7 @@ public class ActorController {
     }
 
     @PostMapping(path="/add")
-    public @ResponseBody String addNewActor (@RequestBody ActorDto actorDto){
+    public @ResponseBody Actor addNewActor (@RequestBody ActorDto actorDto){
         return actorService.createActor(actorDto);
     }
 

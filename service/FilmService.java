@@ -15,7 +15,7 @@ public class FilmService {
         this.filmRepository = filmRepository;
     }
 
-    public String createFilm(FilmDto filmDto){
+    public Film createFilm(FilmDto filmDto){
         Film film = new Film();
         film.setTitle(filmDto.getTitle());
         film.setDescription(filmDto.getDescription());
@@ -30,9 +30,7 @@ public class FilmService {
         film.setSpecialFeatures("null");
         film.setFulltext("null");
 
-        filmRepository.save(film);
-
-        return "Film Saved";
+        return filmRepository.save(film);
     }
 
     public Iterable<Film> getAll(){

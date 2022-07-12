@@ -15,21 +15,24 @@ import java.util.Optional;
 @Service
 public class ActorService {
     @Autowired
-    private ActorRepository actorRepository;
+    private final ActorRepository actorRepository;
 
     @Autowired
     private FilmService filmService;
     @Autowired
     private FilmActorService filmActorService;
 
-    public String createActor(ActorDto actorDto) {
+    public ActorService(ActorRepository actorRepository) {
+        this.actorRepository = actorRepository;
+    }
+
+    public Actor createActor(ActorDto actorDto) {
         Actor actor = new Actor();
         actor.setFirstName(actorDto.firstName);
         actor.setLastName(actorDto.lastName);
         actor.setLastUpdate(LocalDateTime.now());
-        actorRepository.save(actor);
 
-        return "Actor Saved";
+        return actorRepository.save(actor);
     }
 
     public Iterable<Actor> getAll() {

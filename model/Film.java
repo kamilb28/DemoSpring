@@ -62,4 +62,21 @@ public class Film {
     public void addConnection(FilmActor filmActorConnection) {
         filmActorConnections.add(filmActorConnection);
     }
+
+    @Override
+    public int hashCode() {
+        return 11;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Actor other = (Actor) obj;
+        return filmId != null && filmId.equals(other.getActorId());
+    }
 }
