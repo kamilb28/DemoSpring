@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class CategoryService {
@@ -28,5 +30,9 @@ public class CategoryService {
 
     public Iterable<Category> getAll() {
         return categoryRepository.findAll();
+    }
+
+    public Optional<Category> getById(Integer categoryId) {
+        return categoryRepository.findById(categoryId);
     }
 }

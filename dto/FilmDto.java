@@ -15,8 +15,6 @@ public class FilmDto {
 
     public Integer releaseYear;
 
-    public short languageId;
-
     public short rentalDuration;
 
     public float rentalRate;

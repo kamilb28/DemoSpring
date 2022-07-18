@@ -1,7 +1,7 @@
-package com.example.demo.service;
+package com.example.demo.notuseservices;
 
-import com.example.demo.model.FilmActor;
-import com.example.demo.repository.FilmActorRepository;
+import com.example.demo.notusemodels.FilmActor;
+import com.example.demo.notuserepos.FilmActorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

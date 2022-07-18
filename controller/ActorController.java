@@ -50,12 +50,4 @@ public class ActorController {
         if(actor.isEmpty()) throw new RecordNotFoundException();
         return actorService.deleteActor(id);
     }
-
-    @PutMapping(path = "/{actorid}/assigntofilm/{filmid}")
-    public @ResponseBody String assignActor(
-            @PathVariable int actorid,
-            @PathVariable int filmid
-    ) {
-        return actorService.assignActorToFilm(actorid,filmid);
-    }
 }

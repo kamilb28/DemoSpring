@@ -1,5 +1,7 @@
-package com.example.demo.model;
+package com.example.demo.notusemodels;
 
+import com.example.demo.model.Actor;
+import com.example.demo.model.Film;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,6 +22,9 @@ public class FilmActor {
         this.id = id;
         this.lastUpdate = ldt;
     }
+
+
+    // Stare podejście (film One-to-Many film_actor Many-to-One actor)
 
     @ManyToOne
     @MapsId("actorId")

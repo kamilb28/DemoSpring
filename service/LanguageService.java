@@ -6,6 +6,8 @@ import com.example.demo.repository.LanguageRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class LanguageService {
@@ -26,5 +28,9 @@ public class LanguageService {
 
     public Iterable<Language> getAllLanguages(){
         return languageRepository.findAll();
+    }
+
+    public Optional<Language> getById(Integer languageId) {
+        return languageRepository.findById(languageId);
     }
 }

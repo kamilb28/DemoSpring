@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Resource not available")
 public class RecordNotFoundException extends RuntimeException {
+
+    // z wiadomością
     public RecordNotFoundException(String message, Throwable cause){
         super(message, cause);
     }

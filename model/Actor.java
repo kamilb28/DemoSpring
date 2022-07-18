@@ -1,11 +1,13 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.hibernate.Hibernate;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Objects;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -18,8 +20,14 @@ public class Actor {
     @Column(name = "actor_id")
     private Integer actorId;
 
-    @OneToMany(mappedBy = "actor", cascade = CascadeType.ALL)
-    private Set<FilmActor> filmActorConnections;
+    @JsonIgnore
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @ManyToMany(mappedBy = "actors")
+    private Set<Film> films = new HashSet<>();
+
+    //Stare podejście z tabelą przejściową
+    //@OneToMany(mappedBy = "actor", cascade = CascadeType.ALL)
+    //private Set<FilmActor> filmActorConnections;
 
     @Column(name = "first_name", nullable = false)
     private String firstName;
@@ -29,10 +37,6 @@ public class Actor {
 
     @Column(name = "last_update")
     private LocalDateTime lastUpdate;
-
-    public void addConnection(FilmActor filmActorConnection) {
-        filmActorConnections.add(filmActorConnection);
-    }
 
     @Override
     public int hashCode() {
@@ -49,5 +53,9 @@ public class Actor {
             return false;
         Actor other = (Actor) obj;
         return actorId != null && actorId.equals(other.getActorId());
+    }
+
+    public void removeFilm(Film film) {
+        films.remove(film);
     }
 }

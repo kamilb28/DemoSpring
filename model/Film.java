@@ -1,13 +1,18 @@
 package com.example.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
+@EqualsAndHashCode
 @Entity
 @Table(name = "film")
 public class Film {
@@ -16,9 +21,20 @@ public class Film {
     @Column(name = "film_id")
     private Integer filmId;
 
+    @ManyToMany
+    @JoinTable(
+            name = "film_actor",
+            joinColumns = @JoinColumn(name = "film_id"),
+            inverseJoinColumns = @JoinColumn(name = "actor_id")
+    )
+    private Set<Actor> actors = new HashSet<>();
+
+    /*
+    Stare podejście z tabelą przejściową
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<FilmActor> filmActorConnections;
+     */
 
     @Column(nullable = false)
     private String title;
@@ -29,8 +45,17 @@ public class Film {
     @Column(name = "release_year", nullable = false)
     private Integer releaseYear;
 
-    @Column(name = "language_id", nullable = false)
-    private short languageId;
+    @ManyToMany
+    @JoinTable(
+            name = "film_category",
+            joinColumns = @JoinColumn(name = "film_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    private Set<Category> categories = new HashSet<>();
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "language_id", referencedColumnName = "language_id")
+    private Language language;
 
     @Column(name = "rental_duration", nullable = false)
     private short rentalDuration;
@@ -47,26 +72,14 @@ public class Film {
     @Column(nullable = false)
     private String rating;
 
-    @Column(name = "last_update", nullable = false)
+    @Column(name = "last_update")
     private LocalDateTime lastUpdate;
 
     @Column(name = "special_features")
     private String specialFeatures;
 
-    // chyba trzeba zrobic coustomowy
-    // https://discourse.hibernate.org/t/postgres-tsvector-fields-and-hibernate/1838
-    // https://vladmihalcea.com/postgresql-inet-type-hibernate/
     @Column
     private String fulltext;
-
-    public void addConnection(FilmActor filmActorConnection) {
-        filmActorConnections.add(filmActorConnection);
-    }
-
-    @Override
-    public int hashCode() {
-        return 11;
-    }
 
     @Override
     public boolean equals(Object obj) {

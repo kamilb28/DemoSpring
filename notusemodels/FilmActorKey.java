@@ -1,11 +1,10 @@
-package com.example.demo.model;
+package com.example.demo.notusemodels;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.criteria.CriteriaBuilder;
 import java.io.Serializable;
 
 @Data
